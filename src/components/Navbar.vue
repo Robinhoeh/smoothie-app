@@ -27,6 +27,5 @@ export default {
 <style lang="scss">
 .navbar nav {
   padding: 0 20px;
-  background: green;
 }
 </style>
