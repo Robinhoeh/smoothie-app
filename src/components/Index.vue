@@ -41,9 +41,12 @@ export default {
       // Snapshot is state of arrays collection at that current time
       .then(snapshot => {
         snapshot.forEach(doc => {
-          let smoothie = doc.data();
-          smoothie.id;
-          this.smoothies.push(smoothie);
+          // retrieve and create smoothie from DB
+          let smoothieDb = doc.data();
+          // id Binds each induvidual smoothie
+          smoothieDb.id = doc.id;
+          // Push each smoothie from FB doc to local data array
+          this.smoothies.push(smoothieDb);
         });
       });
   }
