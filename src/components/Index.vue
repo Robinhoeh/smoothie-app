@@ -25,11 +25,11 @@ export default {
     };
   },
   methods: {
-    // True, item stays - false, item removed
+    // Becuase we delete the item, we want the result to be false
+    // !== True, item stays - is equal === false, item removed
+    // check if the smoothie in .filter is !== to the id being clicked on first
     deleteSmoothie(id) {
-      console.log(id);
       this.smoothies = this.smoothies.filter(smoothie => {
-        console.log(id);
         return smoothie.id !== id;
       });
     }
