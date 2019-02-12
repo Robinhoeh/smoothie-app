@@ -14,25 +14,38 @@
   </div>
 </template>
 <script>
+import dataBase from '@/firebase/init';
+
 export default {
   name: 'Index',
   data() {
     return {
-      smoothies: [
-        { title: 'Ninja Brew', slug: 'ninja-brew', ingredients: ['banana', 'coffee', 'coco milk'], id: '1' },
-        { title: 'Morning Mood', slug: 'morning-mood', ingredients: ['Mango', 'coconut', 'pineapple juice'], id: '2' }
-      ]
+      smoothies: []
     };
   },
   methods: {
     // Becuase we delete the item, we want the result to be false
-    // !== True, item stays - is equal === false, item removed
+    // ! True, item stays - if equal = false, item removed
     // check if the smoothie in .filter is !== to the id being clicked on first
     deleteSmoothie(id) {
       this.smoothies = this.smoothies.filter(smoothie => {
         return smoothie.id !== id;
       });
     }
+  },
+  created() {
+    // Fecth data from DB firestore
+    dataBase
+      .collection('smoothies')
+      .get()
+      // Snapshot is state of arrays collection at that current time
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let smoothie = doc.data();
+          smoothie.id;
+          this.smoothies.push(smoothie);
+        });
+      });
   }
 };
 </script>
