@@ -25,13 +25,14 @@ export default {
   },
   methods: {
     // Becuase we delete the item, we want the result to be false
-    // !True, item stays - if equal = false, item removed
+    // if !True, item stays - if equal = false, item removed
     // check if the smoothie in .filter is !== to the id being clicked on first
     deleteSmoothie(id) {
-      // Delete doc from firestore
+      // Refernce the DB
       dataBase
         .collection('smoothies')
         .doc(id)
+        //Delete from DB/Firebase
         .delete()
         .then(() => {
           // Sync up local data as well ie. front end
@@ -43,8 +44,9 @@ export default {
         });
     }
   },
+  // Data is pushed before Page displayed
   created() {
-    // Fecth data from DB firestore
+    // Reference data from DB firestore
     dataBase
       .collection('smoothies')
       .get()

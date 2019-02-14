@@ -2,12 +2,12 @@
   <div class="navbar">
     <nav class="nav-extended indigo darken-2">
       <div class="nav-content">
-        <router-link to="">
+        <router-link to="/">
           <span class="nav-title">Smoothie App</span>
         </router-link>
         <a href="" class="btn-floating btn-large halfway-fab pink">
-          <router-link to="">
-            <i class="material-icons">add</i>
+          <router-link to='/add-smoothie'>
+            <i class=" material-icons">add</i>
           </router-link>
         </a>
       </div>
