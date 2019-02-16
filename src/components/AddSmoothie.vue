@@ -9,9 +9,13 @@
       <div class="field add-ingredient add-smoothie__ingredient-input">
         <label for="add-ingredient">Add an ingredient:</label>
         <input type="text" name="add-ingredient" @keydown.tab.prevent="addIngredient" v-model="nextIngredient">
+        <p v-if="feedback" class="red-text">{{ feedback }}</p>
+      </div>
+      <div v-for="(smoothieIngredient, index) in smoothieIngredients" :key="index">
+        <label for="smoothieIngredient">Ingredient: </label>
+        <input type="text" name="smoothieIngredient" v-model="smoothieIngredients[index]">
       </div>
       <div class="field center-align">
-        <p v-if="feedback" class="red-text">{{ feedback }}</p>
         <button class="btn pink">Add Smoothie</button>
       </div>
     </form>
