@@ -8,11 +8,12 @@
       </div>
       <div class="field add-ingredient add-smoothie__ingredient-input">
         <label for="add-ingredient">Add an ingredient:</label>
-        <input type="text" name="add-ingredient" @keydown.tab.prevent="addIngredient" v-model="nextIngredient">
+        <input type="text" name="add-ingredient" @keydown.tab.prevent="addIngredient" v-model="tabbedNextIngredient">
         <p v-if="feedback" class="red-text">{{ feedback }}</p>
       </div>
       <div v-for="(smoothieIngredient, index) in smoothieIngredients" :key="index">
         <label for="smoothieIngredient">Ingredient: </label>
+        <!-- v model is bound to the smoothieAingredients array below -->
         <input type="text" name="smoothieIngredient" v-model="smoothieIngredients[index]">
       </div>
       <div class="field center-align">
@@ -27,7 +28,7 @@ export default {
   data() {
     return {
       title: null,
-      nextIngredient: null,
+      tabbedNextIngredient: null,
       smoothieIngredients: [],
       feedback: null
     };
@@ -36,12 +37,18 @@ export default {
     addSmoothieRecipe() {
       console.log(this.title, this.ingredients);
     },
+    //Push new ing to local array
     addIngredient() {
-      if (this.nextIngredient) {
-        this.smoothieIngredients.push(this.nextIngredient);
-        this.nextIngredient = null;
+      // check to see if ing exists in input
+      if (this.tabbedNextIngredient) {
+        // push tabbedNextIngredient input to smoothieIng array
+        this.smoothieIngredients.push(this.tabbedNextIngredient);
+        //Set input to empty
+        this.tabbedNextIngredient = null;
+        //Reset feedback condition on when input has data again or else it stays
         this.feedback = null;
       } else {
+        // If input is empty - set feeback condition
         this.feedback = 'Please enter an item to add an ingredient';
       }
     }
