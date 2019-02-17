@@ -8,7 +8,9 @@
       </div>
       <div class="field add-ingredient add-smoothie__ingredient-input">
         <label for="add-ingredient">Add an ingredient:</label>
+        <!-- On tab click - call addIng func --- pushes new ing to array, displays next ing -->
         <input type="text" name="add-ingredient" @keydown.tab.prevent="addIngredient" v-model="tabbedNextIngredient">
+        <!-- v-if is only running if feedback gets updated -->
         <p v-if="feedback" class="red-text">{{ feedback }}</p>
       </div>
       <div v-for="(smoothieIngredient, index) in smoothieIngredients" :key="index">
@@ -22,7 +24,10 @@
     </form>
   </div>
 </template>
+
 <script>
+import dataBase from '@/firebase/init';
+import slugify from 'slugify';
 export default {
   name: 'AddSmoothie',
   data() {
@@ -35,7 +40,23 @@ export default {
   },
   methods: {
     addSmoothieRecipe() {
-      console.log(this.title, this.ingredients);
+      // Check if user has added a title
+      if (this.title) {
+        this.feedback = null;
+        // Create slug
+        this.slug = slugify(this.title, {
+          replacement: '-',
+          remove: /$*_+~.()'"!\-:@]/g,
+          lower: true
+        });
+        // dataBase.collection('smoothies').add({
+        //   title: this.title,
+        //   ingredients: this.smoothieIngredients,
+        //   slug: this.slug
+        // });
+      } else {
+        this.feedback = 'You must enter a smoothie title';
+      }
     },
     //Push new ing to local array
     addIngredient() {
