@@ -46,14 +46,15 @@ export default {
         // Create slug
         this.slug = slugify(this.title, {
           replacement: '-',
-          remove: /$*_+~.()'"!\-:@]/g,
+          remove: /$_+~.()'"!\-:@]/g,
           lower: true
         });
-        // dataBase.collection('smoothies').add({
-        //   title: this.title,
-        //   ingredients: this.smoothieIngredients,
-        //   slug: this.slug
-        // });
+        console.log(this.slug);
+        dataBase.collection('smoothies').add({
+          title: this.title,
+          ingredients: this.smoothieIngredients,
+          slug: this.slug
+        });
       } else {
         this.feedback = 'You must enter a smoothie title';
       }
