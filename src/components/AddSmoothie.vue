@@ -10,7 +10,7 @@
         <label for="add-ingredient">Add an ingredient:</label>
         <!-- On tab click - call addIng func --- pushes new ing to array, displays next ing -->
         <input type="text" name="add-ingredient" @keydown.tab.prevent="addIngredient" v-model="tabbedNextIngredient">
-        <!-- v-if is only running if feedback gets updated -->
+        <!-- v-if is only running if feedback gets updated which === truthy cuz its a string -->
         <p v-if="feedback" class="red-text">{{ feedback }}</p>
       </div>
       <div v-for="(smoothieIngredient, index) in smoothieIngredients" :key="index">
@@ -42,19 +42,34 @@ export default {
     addSmoothieRecipe() {
       // Check if user has added a title
       if (this.title) {
+        // reset feedback to null = don't shwow the err msg
         this.feedback = null;
-        // Create slug
+        // Create slug with the title
         this.slug = slugify(this.title, {
+          // similar to .join()
           replacement: '-',
+          // Remove any of these special characters
           remove: /$_+~.()'"!\-:@]/g,
+          // make the slug lower case
           lower: true
         });
-        console.log(this.slug);
-        dataBase.collection('smoothies').add({
-          title: this.title,
-          ingredients: this.smoothieIngredients,
-          slug: this.slug
-        });
+        dataBase
+          // Look inside the collection names smoothies
+          .collection('smoothies')
+          // add these properties
+          .add({
+            title: this.title,
+            ingredients: this.smoothieIngredients,
+            slug: this.slug
+          })
+          // Once ingredients added, take user to home page
+          .then(() => {
+            this.$router.push({ path: '/' });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        // If the title didn't exist, Show this feeback msg
       } else {
         this.feedback = 'You must enter a smoothie title';
       }
