@@ -51,7 +51,7 @@ export default {
           // similar to .join()
           replacement: '-',
           // Remove any of these special characters
-          remove: /$_+~.()'"!\-:@]/g,
+          remove: /$_+~.()'"!-:@]/g,
           // make the slug lower case
           lower: true
         });
