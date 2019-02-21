@@ -6,17 +6,19 @@
         <label for="title">Smoothie Title:</label>
         <input type="text" name="title" v-model="title">
       </div>
+      <div v-for="(smoothieIngredient, index) in smoothieIngredients" :key="index" class="add-smoothie__ingredient">
+        <label for="smoothieIngredient">Ingredient: </label>
+        <!-- v model is bound to the smoothieAingredients array below -->
+        <input type="text" name="smoothieIngredient" v-model="smoothieIngredients[index]">
+        <!-- Pass in the correct ingredient referencing from the v-for item being iterated -->
+        <i class="material-icons delete" @click="deleteIngredient(smoothieIngredient)">delete</i>
+      </div>
       <div class="field add-ingredient add-smoothie__ingredient-input">
         <label for="add-ingredient">Add an ingredient:</label>
         <!-- On tab click - call addIng func --- pushes new ing to array, displays next ing -->
         <input type="text" name="add-ingredient" @keydown.tab.prevent="addIngredient" v-model="tabbedNextIngredient">
         <!-- v-if is only running if feedback gets updated which === truthy cuz its a string -->
         <p v-if="feedback" class="red-text">{{ feedback }}</p>
-      </div>
-      <div v-for="(smoothieIngredient, index) in smoothieIngredients" :key="index">
-        <label for="smoothieIngredient">Ingredient: </label>
-        <!-- v model is bound to the smoothieAingredients array below -->
-        <input type="text" name="smoothieIngredient" v-model="smoothieIngredients[index]">
       </div>
       <div class="field center-align">
         <button class="btn pink">Add Smoothie</button>
@@ -88,6 +90,14 @@ export default {
         // If input is empty - set feeback condition
         this.feedback = 'Please enter an item to add an ingredient';
       }
+    },
+    deleteIngredient(smoothieIngredient) {
+      // true, ing stays - false, ing removed from array
+      this.smoothieIngredients = this.smoothieIngredients.filter(ingredientItem => {
+        // If ingredientItem being iterated is not equal to the item being clicked, it will stay
+        // If the item being itereated is the same as the item being clicked, statement is false and item is removed
+        return ingredientItem != smoothieIngredient;
+      });
     }
   }
 };
@@ -102,8 +112,17 @@ export default {
     font-size: 2em;
     margin: 20px auto;
   }
-  &__ingredient-input {
+  &__ingredient {
     margin: 20px auto;
+    position: relative;
+    .delete {
+      position: absolute;
+      right: 0;
+      bottom: 16px;
+      color: #aaa;
+      font-size: 1.4em;
+      cursor: pointer;
+    }
   }
 }
 </style>
