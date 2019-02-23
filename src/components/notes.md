@@ -13,14 +13,14 @@
 
 ### Editing a smoothie
  - Add the route in index.js
- - Include a parameter
+ - Attach a parameter
  - Create an Edit Smoothie component
  - In that component reference the param from the editSmoothie $route
  - index.vue = add router-link to point to EditSmoothie component, pass the params from index.js
  - Style accordingly
 
  ### Query firestore
-  - Using created phase allows allows us access to rendered data but not yet displayed
+  - Using created() phase allows allows us access to rendered data but not yet displayed
   - .where() takes 3 paramaters
    - Property inside records - slug
    - Evaluation param - > < ===
