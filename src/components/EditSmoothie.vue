@@ -15,10 +15,15 @@ export default {
   // Component created but not displayed yet
   created() {
     // store reference to document
-    let ref = dataBase.collection('smoothies').where('slug', '==', this.$route.params.smoothie_slug);
-    ref.get().then(snapshot => {
+    // Query Db for a document with a matching slug
+    let refToDb = dataBase.collection('smoothies').where('slug', '==', this.$route.params.smoothie_slug);
+    // Get current snapshot from DB
+    refToDb.get().then(snapshot => {
+      // Loop through the reference to find current snapshot
       snapshot.forEach(doc => {
+        // Update the smoothie data object
         this.smoothie = doc.data();
+        // Create smoothie.id and attach id given by Firestore
         this.smoothie.id = doc.id;
       });
     });
