@@ -17,23 +17,55 @@
         <p v-if="feedback" class="red-text">{{ feedback }}</p>
       </div>
       <div class="field center-align">
-        <button class="btn pink">Edit Smoothie</button>
+        <button class="btn pink">Update Smoothie</button>
       </div>
     </form>
   </div>
 </template>
 <script>
 import dataBase from '@/firebase/init';
+import slugify from 'slugify';
 export default {
   name: 'EditSmoothie',
   data() {
     return {
       smoothie: null,
       tabbedNextIngredient: null,
-      feedback: null
+      feedback: null,
+      slug: null
     };
   },
   methods: {
+    editSmoothie() {
+      if (this.smoothie.title) {
+        this.feedback = null;
+        this.smoothie.slug = slugify(this.smoothie.title, {
+          replacement: '-',
+          remove: /[$*_+~.()'"!\-:@]/g,
+          lower: true
+        });
+        dataBase
+          .collection('smoothies')
+          // .doc() grabs a single document - auto gen ID by firestore
+          // Below in the created phase, the id was set to the smoothie object
+          // NOW - we have access to that id by firestore
+          .doc(this.smoothie.id)
+          .update({
+            title: this.smoothie.title,
+            slug: this.smoothie.slug,
+            smoothieIngredients: this.smoothie.smoothieIngredients
+          })
+          .then(() => {
+            // Forward user to the desired route
+            this.$router.push({ name: 'Index' });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        this.feedback = 'You must enter a smoothie title';
+      }
+    },
     addIngredient() {
       // check to see if ing exists in input
       if (this.tabbedNextIngredient) {
