@@ -6,9 +6,10 @@
         <label for="title">Smoothie Title:</label>
         <input type="text" name="title" v-model="smoothie.title">
       </div>
-      <div v-for="(smoothieIngredient, index) in smoothie.smoothieIngredients" :key="index" class="edit-smoothie__ingredient">
+      <div v-for="(smoothieIngredient, index) in smoothie.ingredients" :key="index" class="edit-smoothie__ingredient">
         <label for="smoothieIngredient">Ingredient: </label>
-        <input type="text" name="smoothieIngredient" v-model="smoothie.smoothieIngredients[index]">
+        <!-- smoothie.ingredients has to have the same structure as the firestore DB -->
+        <input type="text" name="smoothieIngredient" v-model="smoothie.ingredients[index]">
         <i class="material-icons delete" @click="deleteIngredient(smoothieIngredient)">delete</i>
       </div>
       <div class="field add-ingredient add-smoothie__ingredient-input">
@@ -37,6 +38,7 @@ export default {
   },
   methods: {
     editSmoothie() {
+      // Add smoothie. becuase all of the data is being store originally on the smoothie object
       if (this.smoothie.title) {
         this.feedback = null;
         this.smoothie.slug = slugify(this.smoothie.title, {
@@ -53,7 +55,7 @@ export default {
           .update({
             title: this.smoothie.title,
             slug: this.smoothie.slug,
-            smoothieIngredients: this.smoothie.smoothieIngredients
+            ingredients: this.smoothie.ingredients
           })
           .then(() => {
             // Forward user to the desired route
@@ -70,7 +72,7 @@ export default {
       // check to see if ing exists in input
       if (this.tabbedNextIngredient) {
         // push tabbedNextIngredient data to smoothie data object
-        this.smoothie.smoothieIngredients.push(this.tabbedNextIngredient);
+        this.smoothie.ingredients.push(this.tabbedNextIngredient);
         //Set input to empty
         this.tabbedNextIngredient = null;
         //Reset feedback condition on when input has data again or else it stays
@@ -82,7 +84,7 @@ export default {
     },
     deleteIngredient(smoothieIngredient) {
       // true, ing stays - false, ing removed from array
-      this.smoothie.smoothieIngredients = this.smoothie.smoothieIngredients.filter(ingredientItem => {
+      this.smoothie.ingredients = this.smoothie.ingredients.filter(ingredientItem => {
         // If ingredientItem being iterated is not equal to the item being clicked, it will stay
         // If the item being itereated is the same as the item being clicked, statement is false and item is removed
         return ingredientItem != smoothieIngredient;
