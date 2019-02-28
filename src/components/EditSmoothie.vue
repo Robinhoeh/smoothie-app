@@ -48,7 +48,7 @@ export default {
         });
         dataBase
           .collection('smoothies')
-          // .doc() grabs a single document - auto gen ID by firestore
+          // .doc() grabs a single document/record - auto gen ID by firestore
           // Below in the created phase, the id was set to the smoothie object
           // NOW - we have access to that id by firestore
           .doc(this.smoothie.id)
@@ -58,7 +58,7 @@ export default {
             ingredients: this.smoothie.ingredients
           })
           .then(() => {
-            // Forward user to the desired route
+            // Forward user to the desired route after they hit tab
             this.$router.push({ name: 'Index' });
           })
           .catch(err => {

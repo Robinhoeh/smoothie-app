@@ -34,3 +34,7 @@
     3. Getting the record
     4. Pushing record onto data object
     5. NOW, record is stored locally on smoothie object
+
+ - smoothie.id thats being passed to the .doc() is referenced from the created phase
+ which is being referenced from firestore
+
