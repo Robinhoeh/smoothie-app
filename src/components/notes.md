@@ -1,3 +1,9 @@
+### Index page
+ - This will be the homepage
+ - Gets added to routes:[]
+
+
+
 ### On Form submit:
 
  - All ingredients should have been added to the smoothieIngredients array
@@ -37,4 +43,7 @@
 
  - smoothie.id thats being passed to the .doc() is referenced from the created phase
  which is being referenced from firestore
+
+  - What event is on the update smoothie button?
+
 
