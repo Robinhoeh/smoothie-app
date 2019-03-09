@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     // Becuase we delete the item, we want the result to be false
-    // if !True, item stays - if equal = false, item removed
     // check if the smoothie in .filter is !== to the id being clicked on first
     deleteSmoothie(id) {
       // Refernce the DB
@@ -41,9 +40,9 @@ export default {
         .delete()
         .then(() => {
           // Sync up local data as well ie. front end
+          // This is why FRAMEWORKS very important
           // Update local smoothies array
           this.smoothies = this.smoothies.filter(smoothie => {
-            // Check if smoothie.id is not same as smoothie passed in at top
             return smoothie.id !== id;
           });
         });
@@ -53,7 +52,9 @@ export default {
   created() {
     // Reference data from DB firestore
     dataBase
+      //smoothies is the string defined by context in firestore
       .collection('smoothies')
+      //.get() returns a promise
       .get()
       // Snapshot is state of arrays collection at that current time
       .then(snapshot => {
@@ -61,8 +62,9 @@ export default {
           // retrieve and create smoothie from DB
           let smoothieFromFirebase = doc.data();
           // id Binds each induvidual smoothie
+          // id is randomized ID from firestore - assigned to each smoothie
           smoothieFromFirebase.id = doc.id;
-          // Push each smoothie from FB doc to local data array
+          // Push each smoothie from FB doc to LOCAL data array
           this.smoothies.push(smoothieFromFirebase);
         });
       });
