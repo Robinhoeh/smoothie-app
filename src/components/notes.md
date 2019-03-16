@@ -9,19 +9,18 @@
  - When you access data and loop over that's already nested inside of an array, use the INDEX that VUE gives you for the KEY
  - Slug is a URL friendly version the title of the current path/page
 
- #### Delete smoothie button
+ #### Delete smoothie
  - Add the delete icon
  - Attach delete function
  - Need to know which smoothie we are deleting
   - Pass that specific smoothie function using the .id from current smoothie iteration
  - When deleting an item, we need to let the DATA know we are taking away an item
  - Reference the data, smoothie array,  THEN update it with the new array
-  - The id being passed in is the id being clicked on - filter checks if that id EXISTS in the original array - if condition is FALSE or is equal to the same id being passed, it takes it out of original array, if smoothie.id is NOT equal or TRUE to id being passed in, it leaves it in original array
+  - The id being passed in is the id being clicked on - filter checks if that id EXISTS in the original array - if condition is FALSE and is equal to the same id being passed, it takes it out of original array, if smoothie.id is NOT equal or TRUE to id being passed in, it leaves it in original array
 
- - We update the back end first, delete the item from the DB  - THEN - update the local smoothies array
+ - We update the back end first, delete the item from the DB  - THEN - update the local smoothies array locally, updating the FE display
 
  #### Accessing DB
-
  - Import from firestore
  - export from init.js
  - Import to index.vue
@@ -37,6 +36,13 @@
 SNAPSHOT - state of smoothie collection at current time
 doc.data() is exaclty the data we need]
 Now - the id being passed in when deleting, is the randomized ID from firebase
+
+### Add Smoothie
+ - Need a form that doesn't submit every time smoothie is added
+ - Whenever there is a input item that will be dynamically added, use v-for
+  - In this case, the Ingredient div isn't visible until you tab Add an ingredient
+ - v-bind added ingredients to local storage
+ - How will the form expand as you add more ingredients? It makes sense for the add an ingredient input to go under each new input
 
 
 ### On Form submit:
@@ -59,6 +65,15 @@ Now - the id being passed in when deleting, is the randomized ID from firebase
  - In that component reference the param from the editSmoothie $route
  - index.vue = add router-link to point to EditSmoothie component, pass the params from index.js
  - Style accordingly
+
+ ### Added functionality
+ - Transition on page initial page load
+ - Back button
+ - Transition on add recipe
+ - Animation or loading screen on ADD SMOOTHIE button
+ - Add transition-group to delete button
+ - Add filter to smoothies
+ -
 
  ### Query firestore
   - Using created() phase allows allows us access to rendered data but not yet displayed

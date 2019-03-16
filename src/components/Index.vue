@@ -36,12 +36,8 @@ export default {
       dataBase
         .collection('smoothies')
         .doc(id)
-        //Delete from DB/Firebase
         .delete()
         .then(() => {
-          // Sync up local data as well ie. front end
-          // This is why FRAMEWORKS very important
-          // Update local smoothies array
           this.smoothies = this.smoothies.filter(smoothie => {
             return smoothie.id !== id;
           });
@@ -62,7 +58,7 @@ export default {
           // retrieve and create smoothie from DB
           let smoothieFromFirebase = doc.data();
           // id Binds each induvidual smoothie
-          // id is randomized ID from firestore - assigned to each smoothie
+          // id is randomized ID from firestore doc object - assigned to each smoothie
           smoothieFromFirebase.id = doc.id;
           // Push each smoothie from FB doc to LOCAL data array
           this.smoothies.push(smoothieFromFirebase);
