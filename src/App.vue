@@ -10,8 +10,8 @@
       <router-view></router-view>
     </transition>
     <hr>
-    <footer class="footer container">
-      <p>Made with 🥥's by Robin</p>
+    <footer class="container">
+      <p>Made with 🥥's by &copy; Robin</p>
     </footer>
   </div>
 </template>
@@ -55,15 +55,17 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 // Page fades in
 .fade-enter-active,
 .fade-leave-active {
-  transition: height, opacity 0.5s;
+  transition-duration: 0.6s;
+  transition-property: height, opacity;
+  transition-timing-function: ease;
   overflow: hidden;
 }
 .fade-enter,
-.fade-leave-to {
+.fade-leave-active {
   opacity: 0;
 }
 </style>
