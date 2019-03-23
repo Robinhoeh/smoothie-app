@@ -3,7 +3,7 @@
     <Navbar></Navbar>
     <header></header>
     <transition
-      name="trasnitionName"
+      :name="transitionName"
       mode="out-in"
       @beforeLeave="beforeLeave"
       @enter="enter"
@@ -82,7 +82,7 @@ export default {
 // Page fades in
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: 0.6s;
+  transition-duration: 0.5s;
   transition-property: height, opacity;
   transition-timing-function: ease;
   overflow: hidden;

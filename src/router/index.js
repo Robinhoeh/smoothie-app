@@ -1,10 +1,5 @@
-
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '@/components/Index'
-import AddSmoothie from '@/components/AddSmoothie'
-import EditSmoothie from '@/components/EditSmoothie'
-import FavoriteRecipe from '@/components/FavoriteRecipe'
 
 Vue.use(VueRouter)
 
@@ -14,24 +9,24 @@ export default new VueRouter({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: () => import('@/components/Index')
     },
     {
       path: '/add-smoothie',
       name: 'AddSmoothie',
-      component: AddSmoothie
+      component: () => import('@/components/AddSmoothie')
     },
     {
       path: '/edit-smoothie/:smoothie_slug',
       name: 'EditSmoothie',
-      component: EditSmoothie
+      component: () => import('@/components/EditSmoothie')
     },
     {
       path: '/edit-smoothie/:smoothie_slug/favorite-recipe',
       name: 'FavoriteRecipe',
-      component: FavoriteRecipe,
-      meta: {transitionName: 'slide'}
-    }
+      component: () => ('@/components/FavoriteSmoothie'),
+      meta: {transitionName: 'slide'},
+    },
   ]
 })
 
