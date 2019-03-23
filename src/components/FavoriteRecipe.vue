@@ -1,12 +1,12 @@
 <template>
   <div class="favorite-recipe container">
-    <h1>Fav recipe</h1>
+    <h1>Fav recipes 🥥</h1>
   </div>
 </template>
 
 <script>
-import dataBase from '@/firesbase/init';
-import slugify from 'sluify';
+import dataBase from '@/firebase/init';
+import slugify from 'slugify';
 
 export default {
   name: 'FavoriteRecipe',

@@ -1,6 +1,9 @@
 <template>
   <div v-if="smoothie" class="edit-smoothie container">
     <h2>Edit {{ smoothie.title }} Smoothie</h2>
+    <h4>
+      <router-link to="/edit-smoothie/:smoothie_slug/favorite-recipe">Favorite Recipes</router-link>
+    </h4>
     <form @submit.prevent="editSmoothie">
       <div class="field title">
         <label for="title">Smoothie Title:</label>
