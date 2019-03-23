@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
   mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -14,17 +15,17 @@ export default new VueRouter({
     {
       path: '/add-smoothie',
       name: 'AddSmoothie',
-      component: () => import('@/components/AddSmoothie')
+      component: () => import('@/views/create/CreateSmoothieView')
     },
     {
       path: '/edit-smoothie/:smoothie_slug',
       name: 'EditSmoothie',
-      component: () => import('@/components/EditSmoothie')
+      component: () => import('@/components/edit/EditSmoothie')
     },
     {
       path: '/edit-smoothie/:smoothie_slug/favorite-recipe',
       name: 'FavoriteRecipe',
-      component: () => ('@/components/FavoriteSmoothie'),
+      component: () => ('@/components/create/FavoriteSmoothie'),
       meta: {transitionName: 'slide'},
     },
   ]

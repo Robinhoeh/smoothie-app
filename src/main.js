@@ -4,6 +4,7 @@ import router from './router'
 
 Vue.use(router)
 
+
 Vue.config.productionTip = false
 
 new Vue({
