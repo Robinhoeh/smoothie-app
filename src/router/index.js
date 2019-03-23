@@ -20,13 +20,18 @@ export default new VueRouter({
     {
       path: '/edit-smoothie/:smoothie_slug',
       name: 'EditSmoothie',
-      component: () => import('@/components/edit/EditSmoothie')
+      component: () => import('@/views/edit/EditSmoothieView')
     },
     {
       path: '/edit-smoothie/:smoothie_slug/favorite-recipe',
       name: 'FavoriteRecipe',
-      component: () => ('@/components/create/FavoriteSmoothie'),
+      component: () => ('@/views/create/FavoriteSmoothie'),
       meta: {transitionName: 'slide'},
+    },
+    {
+      path: '/sign-in',
+      name: 'SignIn',
+      component: () => ('@/views/auth/SignInView')
     },
   ]
 })

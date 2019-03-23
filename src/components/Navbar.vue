@@ -5,6 +5,7 @@
         <router-link to="/">
           <span class="nav-title">Smoothie App</span>
         </router-link>
+        <router-link to="/auth/sign-in">Sign in</router-link>
         <a href="" class="btn-floating btn-large halfway-fab pink">
           <router-link to='/add-smoothie'>
             <i class="material-icons">add</i>
