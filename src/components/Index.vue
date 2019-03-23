@@ -74,6 +74,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
   margin-top: 60px;
+  margin-bottom: 70px;
   .header {
     font-size: 1.8em;
     text-align: center;

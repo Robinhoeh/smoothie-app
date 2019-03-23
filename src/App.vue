@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <Navbar></Navbar>
+    <header></header>
     <transition
-      name="fade"
+      name="trasnitionName"
       mode="out-in"
       @beforeLeave="beforeLeave"
       @enter="enter"
@@ -19,12 +20,34 @@
 <script>
 import Navbar from '@/components/Navbar.vue';
 
+// Make transition dynmaic
+const DEFAULT_TRANSITION = 'fade';
+
 export default {
   name: 'app',
   data() {
     return {
-      prevHeight: 0
+      prevHeight: 0,
+      transitionName: DEFAULT_TRANSITION
     };
+  },
+  //Runs before every route change
+  created() {
+    // check if to or from page has meta transitionname proprty
+    this.$router.beforeEach((to, from, next) => {
+      let transitionName = to.meta.transitionName || from.meta.transitionName;
+      // If yes, we use 'slide'
+      if (transitionName === 'slide') {
+        // depending if we go forward or backward, left or right slide
+        const toDepth = to.path.split('/').length;
+        const fromDepth = from.path.split('/').length;
+        transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+      }
+
+      this.transitionName = transitionName || DEFAULT_TRANSITION;
+
+      next();
+    });
   },
   methods: {
     //pass current page el
@@ -67,5 +90,27 @@ export default {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition-duration: 0.5s;
+  transition-property: height, opacity, transform;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  overflow: hidden;
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate(2em, 0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  transform: translate(-2em, 0);
 }
 </style>
