@@ -67,7 +67,7 @@ Now - the id being passed in when deleting, is the randomized ID from firebase
  - Style accordingly
 
  ### Added functionality
- - Transition on page initial page load 
+ - Transition on page initial page load
  - Back button
  - Transition on add recipe
  - Animation or loading screen on ADD SMOOTHIE button

@@ -25,4 +25,9 @@ export default [
     name: 'SignIn',
     component: () => ('@/views/auth/SignInView')
   },
+  {
+    path: '/join',
+    name: 'Join',
+    component: () => ('@/views/auth/JoinView')
+  }
 ]

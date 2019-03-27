@@ -1,6 +1,7 @@
 <template>
   <div class="sign-in-view container">
-    <sign-in></sign-in>
+    <h2>Sign in View</h2>
+    </sign-in>
   </div>
 </template>
 

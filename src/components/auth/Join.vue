@@ -1,17 +1,17 @@
 <template>
-  <div class="sign-in container">
-    <h2>Sign In Component</h2>
+  <div class="join-cont container">
+    <h2>Join component</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Signin',
+  name: 'Join',
   data() {
     return {};
   }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>
