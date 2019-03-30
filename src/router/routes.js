@@ -21,8 +21,8 @@ export default [
     meta: { transitionName: 'slide' },
   },
   {
-    path: '/sign-in',
-    name: 'SignIn',
+    path: '/sign-in-view',
+    name: 'SignInView',
     component: () => ('@/views/auth/SignInView')
   },
   {

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Join View</h2>
-    <Join></Join>
+    <join></join>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import Join from '@/components/auth/Join';
 
 export default {
   name: 'JoinView',
-  component: { Join },
+  components: { Join },
   data() {
     return {};
   }

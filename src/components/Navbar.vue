@@ -15,12 +15,8 @@
         </a>
       </div>
       <div class="hidden-sm-and-down">
-        <router-link to='/views/auth/sign-in'>
-          <button class="btn-floating pink" to="/views/auth/sign-in">SIGN IN</button>
-        </router-link>
-        <router-link to='/views/auth/join'>
-          <button class="btn-floating pink">JOIN</button>
-        </router-link>
+        <router-link :to="{ name: 'SignInView' }">SIGN IN</router-link>
+        <router-link :to="{ name: 'Join' }"> JOIN </router-link>
       </div>
     </nav>
   </div>
